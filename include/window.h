@@ -1,10 +1,7 @@
 #pragma once
-#define GLFW_INCLUDE_NONE
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <GL/gl.h>
-#include <string>
-#include <unordered_map>
+
+#include "gl_config.h"
+#include "renderer.h"
 
 class AppWindow{
 public:
@@ -13,18 +10,27 @@ public:
 
     virtual bool renderLoop();
 
-    void setCurrent(){ glfwMakeContextCurrent(_win); }
+    void setAsCurrentContext(){ glfwMakeContextCurrent(_win); }
     void setTitle(const std::string& title) { glfwSetWindowTitle(_win, title.c_str()); }
 
-    GLFWwindow* getWindowPointer(){ return _win; }
+    void addRenderer(const std::string& id, std::shared_ptr<Renderer> r) { _renderers[id] = r; }
+    void removeRenderer(const std::string& id) { _renderers.erase(id); }
+
+    GLFWwindow* getWindowPointer() { return _win; }
 
 private:
+    virtual void controls();
+    void render();
     static void error_callback(int error, const char* description);
     inline static void resize_callback(GLFWwindow* win, int height, int width);
+    static void InitGLFW();
+    static void InitGLEW();
+
     static GLFWwindow* createWindow(int width, int height, const std::string& title);
 
 private:
     GLFWwindow* _win;
+    std::unordered_map<std::string, std::shared_ptr<Renderer>> _renderers;
 };
 
 

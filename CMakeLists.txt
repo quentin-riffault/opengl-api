@@ -16,12 +16,26 @@ add_definitions("-Wall -Wextra")
 add_executable(
 	Opengl_Boilerplate 
 	main.cpp
+
 	src/window.cpp
+	src/renderer.cpp
+	src/triangle_renderer.cpp
+
+	src/opengl_api/opengl_api.cpp
+	src/opengl_api/gl_utils.cpp
+
+	src/opengl_api/buffers/vbo.cpp
+	src/opengl_api/buffers/buffer.cpp
+
+	src/opengl_api/programs/shader.cpp
+	src/opengl_api/programs/program.cpp
+
 	test/test.cpp)
 
 target_include_directories(
 	Opengl_Boilerplate 
 	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/
+	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/opengl_api
 	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/test/
 	)
 
