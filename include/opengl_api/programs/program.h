@@ -12,11 +12,11 @@ public:
 
     virtual ~Program();
 
-    void link();
     void enable();
     void disable();
 
 private:
+    void link();
     GLuint _id = 0;
     std::shared_ptr<Shader> _vshader;
     std::shared_ptr<Shader> _fshader;

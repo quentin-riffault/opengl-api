@@ -31,6 +31,9 @@ private:
 private:
     GLFWwindow* _win;
     std::unordered_map<std::string, std::shared_ptr<Renderer>> _renderers;
+    const std::string DEFAULT_FSHADER_PATH = "/data/Projets/opengl_boilerplate/src/shaders/simple.f.glsl";
+    const std::string DEFAULT_VSHADER_PATH = "/data/Projets/opengl_boilerplate/src/shaders/simple.v.glsl";
+    Program* _default;
 };
 
 

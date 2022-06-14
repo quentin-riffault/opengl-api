@@ -25,7 +25,8 @@ add_executable(
 	src/opengl_api/gl_utils.cpp
 
 	src/opengl_api/buffers/vbo.cpp
-	src/opengl_api/buffers/buffer.cpp
+	src/opengl_api/buffers/ebo.cpp
+	src/opengl_api/buffers/vao.cpp
 
 	src/opengl_api/programs/shader.cpp
 	src/opengl_api/programs/program.cpp

@@ -1,6 +1,10 @@
 #include "window.h"
 #include <stdexcept>
 
+//#define RENDER_OVERRIDE
+
+
+
 AppWindow::AppWindow(int width, int height, const std::string& title){
     _win = createWindow(width, height, title);
     if(!_win) throw std::runtime_error("Could not create window");
@@ -8,6 +12,9 @@ AppWindow::AppWindow(int width, int height, const std::string& title){
     setAsCurrentContext();
 
     glfwSetFramebufferSizeCallback(_win, AppWindow::resize_callback);
+
+    _default = new Program(DEFAULT_FSHADER_PATH, DEFAULT_VSHADER_PATH);
+
 }
 
 AppWindow::~AppWindow() {
@@ -40,9 +47,44 @@ void AppWindow::render(){
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    for(const auto& r : _renderers){
-        r.second->render();
-    }
+    #ifdef RENDER_OVERRIDE
+
+        float vertices[] = {
+            0.5f, 0.0f, 0.0f,
+            0.0f, 0.5f, 0.0f,
+            0.0f, 0.0f, 0.5f
+        };
+
+
+        //uint vao = 0;
+        VAO vao;
+        VBO vbo;
+
+        vao.bind();
+        
+        vbo.setData<float>(sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+        vbo.bind(); 
+        // index, n_elements(1/2/3/4), type(enum), stride size
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), nullptr);
+        glEnableVertexAttribArray(0);
+
+        vbo.unbind();
+        _default->enable();
+
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+
+        _default->disable();
+        vao.unbind();
+
+
+    #else
+
+        for(const auto& r : _renderers){
+            r.second->render();
+        }
+
+    #endif
 
 }
 
