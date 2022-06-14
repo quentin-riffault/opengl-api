@@ -1,9 +1,9 @@
 #pragma once
-#include "buffer.h"
+#include "bindable.h"
 #include "vbo.h"
 #include "ebo.h"
 
-class VAO : public Buffer{
+class VAO : public Bindable{
 
 	public: 
 		VAO(uint vbo_count=1);
@@ -48,6 +48,5 @@ class VAO : public Buffer{
 	private:
     	EBO _ebo;
     	std::vector<std::shared_ptr<VBO>> _vbos;
-		unsigned int _id;
 
 };

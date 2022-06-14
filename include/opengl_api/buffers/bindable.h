@@ -1,12 +1,15 @@
 #pragma once
 #include "gl_config.h"
 
-class Buffer{
+class Bindable{
 
 public:
 
     virtual void bind() = 0;
     virtual void unbind() = 0;
-    virtual ~Buffer(){};
+    virtual ~Bindable(){};
+
+protected:
+    uint _id;
 
 };

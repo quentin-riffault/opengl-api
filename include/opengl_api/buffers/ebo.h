@@ -1,6 +1,7 @@
-#include "buffer.h"
+#pragma once
+#include "bindable.h"
 
-class EBO : public Buffer{
+class EBO : public Bindable{
 
 	public:
 		EBO();
@@ -29,8 +30,6 @@ class EBO : public Buffer{
 		}
 
 	private:
-
-		uint _id;
 		uint _size;	
 
 };

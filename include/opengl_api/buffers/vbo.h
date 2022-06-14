@@ -1,11 +1,11 @@
 #pragma once
 #include "gl_config.h"
-#include "buffers/buffer.h"
+#include "bindable.h"
 #include <vector>
 #include <unistd.h>
 #include "attribute_properties.h"
 
-class VBO : public Buffer{
+class VBO : public Bindable{
 public:
 
     VBO();
@@ -51,7 +51,6 @@ public:
 
 private:
 
-    uint _id;
     GLenum _type = GL_ARRAY_BUFFER;
     ssize_t _dataSize;
     GLenum _dataType;
