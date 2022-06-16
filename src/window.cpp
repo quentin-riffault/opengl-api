@@ -1,5 +1,4 @@
 #include "window.h"
-#include <stdexcept>
 
 //#define RENDER_OVERRIDE
 

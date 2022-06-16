@@ -17,6 +17,12 @@
 #include <memory>
 #include <stdexcept>
 #include <iostream>
+#include <assert.h>
+#include <exception>
+#include <utility>
+#include <iostream>
+#include <fstream>
+#include <unistd.h>
 
 #include "gl_utils.h"
 

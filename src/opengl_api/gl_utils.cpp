@@ -1,5 +1,6 @@
 #include "gl_utils.h"
 #include <iostream>
+#include <stdexcept>
 #include <fstream>
 
 std::string gl_utils::readfile(const std::string& file_path) {

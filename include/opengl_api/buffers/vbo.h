@@ -1,8 +1,6 @@
 #pragma once
 #include "gl_config.h"
 #include "bindable.h"
-#include <vector>
-#include <unistd.h>
 #include "attribute_properties.h"
 
 class VBO : public Bindable{
@@ -52,8 +50,8 @@ public:
 private:
 
     GLenum _type = GL_ARRAY_BUFFER;
-    ssize_t _dataSize;
     GLenum _dataType;
+    ssize_t _dataSize;
     ssize_t _components;
 
 

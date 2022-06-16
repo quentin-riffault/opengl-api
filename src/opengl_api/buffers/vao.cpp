@@ -1,7 +1,4 @@
-#include "opengl_api.h"
 #include "buffers/vao.h"
-#include <assert.h>
-#include <exception>
 
 VAO::VAO(uint vbo_count){
 	glGenVertexArrays(1, &_id);

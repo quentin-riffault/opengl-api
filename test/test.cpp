@@ -1,7 +1,7 @@
 #include "test.h"
 #include "window.h"
 
-#include "triangle_renderer.h"
+#include "renderers/triangle_renderer.h"
 
 void OGLBPTest::test(){
 

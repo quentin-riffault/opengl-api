@@ -18,10 +18,9 @@ add_executable(
 	main.cpp
 
 	src/window.cpp
-	src/renderer.cpp
-	src/triangle_renderer.cpp
+	src/renderers/triangle_renderer.cpp
+	src/renderers/triangle_color_renderer.cpp
 
-	src/opengl_api/opengl_api.cpp
 	src/opengl_api/gl_utils.cpp
 
 	src/opengl_api/buffers/vbo.cpp

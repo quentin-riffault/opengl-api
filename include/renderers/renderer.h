@@ -1,6 +1,6 @@
 #pragma once
 
-#include "opengl_api.h"
+#include "gl_api.h"
 
 class Renderer {
 

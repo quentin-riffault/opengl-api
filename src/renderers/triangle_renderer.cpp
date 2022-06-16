@@ -1,6 +1,5 @@
-#include "triangle_renderer.h"
-#include "opengl_api/opengl_api.h"
-#include <iostream>
+#include "renderers/triangle_renderer.h"
+#include "opengl_api/gl_api.h"
 
 
 TriangleRenderer::TriangleRenderer() : Renderer(), _prog(FSHADER_PATH, VSHADER_PATH){

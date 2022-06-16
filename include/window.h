@@ -1,7 +1,7 @@
 #pragma once
 
 #include "gl_config.h"
-#include "renderer.h"
+#include "renderers/renderer.h"
 
 class AppWindow{
 public:
