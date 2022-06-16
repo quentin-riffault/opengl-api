@@ -16,6 +16,12 @@ public:
     void addRenderer(const std::string& id, std::shared_ptr<Renderer> r) { _renderers[id] = r; }
     void removeRenderer(const std::string& id) { _renderers.erase(id); }
 
+    void setWireframe(const std::string& id, bool status){ _renderers[id]->set_wireframe(status); }
+    void setWireframe(bool status){
+        for(auto it = _renderers.begin(); it != _renderers.end(); it++)
+            it->second->set_wireframe(status);
+    }
+
     GLFWwindow* getWindowPointer() { return _win; }
 
 private:
@@ -27,6 +33,8 @@ private:
     static void InitGLEW();
 
     static GLFWwindow* createWindow(int width, int height, const std::string& title);
+
+
 
 private:
     GLFWwindow* _win;

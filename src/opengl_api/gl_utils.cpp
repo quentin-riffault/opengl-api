@@ -38,16 +38,16 @@ std::vector<float> gl_utils::make_triangle(float center, float height, float bas
 
 std::vector<float> gl_utils::random_colors(ssize_t n_colors, float opacity){
     std::vector<float> colors;
-    colors.reserve(4*n_colors);
+    colors.reserve(n_colors);
 
     std::random_device rd;  // Will be used to obtain a seed for the random number engine
     std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
     std::uniform_real_distribution<> dis(0.0, 1.0);
 
     for(int n = 0; n < n_colors; n++){
-        colors.push_back(dis(gen));
-        colors.push_back(dis(gen));
-        colors.push_back(dis(gen));
+        colors.push_back((dis(gen)));
+        colors.push_back((dis(gen)));
+        colors.push_back((dis(gen)));
         colors.push_back(opacity);
     }
 

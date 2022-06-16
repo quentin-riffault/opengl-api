@@ -10,6 +10,5 @@ void OGLBPTest::test(){
 
     win.addRenderer("triangle", std::make_shared<TriangleColorRenderer>(gl_utils::make_triangle()));
 
-
     while(win.renderLoop());
 }

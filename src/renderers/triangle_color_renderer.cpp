@@ -39,7 +39,17 @@ TriangleColorRenderer::~TriangleColorRenderer(){
 
 void TriangleColorRenderer::render(){
         _prog.enable();
+        glPolygonMode(GL_FRONT_AND_BACK, (wireframe) ? GL_LINE : GL_FILL );
+
+        double time = glfwGetTime();
+        double ct = cos(time);
+        double st = sin(time);
+
+
+        _prog.setUniform<glm::vec4>("color_modifier", glm::vec4(st, ct, 1.0f, ct*ct + st));
+
         _vao.draw();
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         _prog.disable();
 
 }

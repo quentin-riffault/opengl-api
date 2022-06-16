@@ -15,9 +15,21 @@ public:
     void enable();
     void disable();
 
+   template<typename T> void setUniform(const char* uniform_name, const T& uniform_value){
+       throw std::runtime_error("[Program] setUniform : Type not supported");
+   }
+
+   int getUniformLocation(const char* uniform_name);
+
+
+   inline void needEnabled(){
+       if(!_enabled) throw std::runtime_error("[Program] Needs to be enabled");
+   }
+
 private:
     void link();
     GLuint _id = 0;
+    bool _enabled = false;
     std::shared_ptr<Shader> _vshader;
     std::shared_ptr<Shader> _fshader;
 };
