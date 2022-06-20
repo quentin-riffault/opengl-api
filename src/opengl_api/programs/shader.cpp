@@ -44,4 +44,5 @@ void Shader::compileSources(const char* shader_source){
 
 Shader::~Shader(){
     glDeleteShader(_id);
+    gl_utils::check_errors();
 }

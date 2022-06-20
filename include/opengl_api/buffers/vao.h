@@ -11,11 +11,13 @@ class VAO : public Bindable{
 
 		void bind() override{
 			glBindVertexArray(_id);
+    		gl_utils::check_errors();
 			_enabled = true;
 		}
 
 		void unbind() override{
 			glBindVertexArray(0);
+    		gl_utils::check_errors();
 			_enabled = false;
 		}
 
@@ -72,6 +74,7 @@ class VAO : public Bindable{
 		void draw(GLenum mode=GL_TRIANGLES){
 			bind();
 			glDrawElements(mode, _ebo.size(), GL_UNSIGNED_INT, 0);
+    		gl_utils::check_errors();
 			unbind();
 		}
     

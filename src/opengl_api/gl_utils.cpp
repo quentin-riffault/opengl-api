@@ -4,6 +4,8 @@
 #include <fstream>
 #include <vector>
 #include <random>
+#include <GL/glew.h>
+#include <GL/gl.h>
 
 std::string gl_utils::readfile(const std::string& file_path) {
 
@@ -78,4 +80,23 @@ std::vector<float> gl_utils::random_colored_triangles(ssize_t n_triangles, float
     std::cout << vertices.size() << std::endl;
 
     return vertices;
+}
+
+void gl_utils::check_errors()
+{
+
+#ifdef GL_NO_CHECK
+    return;
+#endif
+
+    GLenum error = glGetError();
+    if (error != GL_NO_ERROR)
+    {
+        std::string errmsg = "OpenGL error [" + std::to_string(error) + "] : " + (const char *)glewGetErrorString(error);
+#ifdef GL_DEBUG
+        throw std::runtime_error(errmsg);
+#else
+        std::cerr << errmsg << std::endl;
+#endif
+    }
 }

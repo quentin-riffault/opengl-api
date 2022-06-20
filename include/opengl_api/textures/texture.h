@@ -12,18 +12,15 @@ class Texture : public Bindable{
 		void unbind() override;
 
 		void setParameteri(const GLenum& parameter, const GLenum& value){
-			require_bound();
+			require_bound("Texture", "setParameteri");
 			glTexParameteri(_texType, parameter, value);
+			gl_utils::check_errors();
 		}
 
 		void setTexunit(uint texunit){
 			
-			const int unit = GL_TEXTURE0 + texunit; 
-
-			if(unit > GL_MAX_TEXTURE_UNITS)
-				throw std::invalid_argument(std::string("[Texture] Unit size over max unit (") + std::to_string(GL_MAX_TEXTURE_UNITS) + ")");
-
-			glActiveTexture(unit);
+			glActiveTexture(GL_TEXTURE0 + texunit);
+			gl_utils::check_errors();
 			bind();
 		}
 

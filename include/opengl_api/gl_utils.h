@@ -8,4 +8,5 @@ namespace gl_utils{
     std::vector<float> make_triangle(float center=0.0f, float height=0.5f, float base=0.5f);
     std::vector<float> random_colors(ssize_t n_colors = 3, float opacity = 1.0f);
     std::vector<float> random_colored_triangles(ssize_t n_triangles=1, float opacity = 1.0f);
+    void check_errors();
 }
