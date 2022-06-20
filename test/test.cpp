@@ -24,14 +24,15 @@ void OGLBPTest::test(){
     */
 
     const std::vector<float> triangleData = {
-    //  Position(3)       Color(4)                Texture (2)
-        0.0f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 
+
+    //  x       y     z     r     g     b     a     u      v
+        0.0f,   0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.5f, 0.0f,
+        0.5f,  -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 
         -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f
     };
 
     win.addRenderer("triangleTexData", std::make_shared<TriangleTexRenderer>(triangleData));
-
+    
 
 
     while(win.renderLoop());

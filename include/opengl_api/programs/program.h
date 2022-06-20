@@ -1,8 +1,9 @@
 #pragma once
 
 #include "shader.h"
+#include "buffers/bindable.h"
 
-class Program {
+class Program : public Bindable{
 
 public:
 
@@ -12,8 +13,12 @@ public:
 
     virtual ~Program();
 
-    void enable();
-    void disable();
+    void bind() override;
+    void unbind() override;
+
+    void enable(){ bind(); }
+    
+    void disable(){ unbind(); }
 
    template<typename T> void setUniform(const char*, const T&){
        throw std::runtime_error("[Program] setUniform : Type not supported");
@@ -21,15 +26,8 @@ public:
 
    int getUniformLocation(const char* uniform_name);
 
-
-   inline void needEnabled(){
-       if(!_enabled) throw std::runtime_error("[Program] Needs to be enabled");
-   }
-
 private:
     void link();
-    GLuint _id = 0;
-    bool _enabled = false;
     std::shared_ptr<Shader> _vshader;
     std::shared_ptr<Shader> _fshader;
 };

@@ -13,15 +13,19 @@ public:
 
 private:
 
-    const std::string FSHADER_PATH = TEST_SHADER_PATH+"/simple_tex.f.glsl";
-    const std::string VSHADER_PATH = TEST_SHADER_PATH+"/simple_tex.v.glsl";
-    const std::string TEXTURE_PATH = "/data/Projets/opengl_boilerplate/resources/wall.jpg"; 
+    const std::string FSHADER_PATH = TEST_SHADER_PATH+"/simple_mix.f.glsl";
+    const std::string VSHADER_PATH = TEST_SHADER_PATH+"/simple_mix.v.glsl";
+
+    const std::string TEXTURE1_PATH = "../resources/wall.jpg"; 
+    const std::string TEXTURE2_PATH = "../resources/awesomeface.png"; 
+
     const std::vector<uint> indices = {  
         0, 1, 2,
     };
 
     Program _prog;
-    Texture _tex;
+    Texture _tex1;
+    Texture _tex2;
     VAO _vao;
 
 

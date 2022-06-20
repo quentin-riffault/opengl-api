@@ -55,19 +55,19 @@ void Program::link(){
 
 }
 
-void Program::enable(){
+void Program::bind(){
    glUseProgram(_id);
-   _enabled = true; // Warning : Will NOT work in concurrent or if 
+   _enabled = true; 
 }
 
-void Program::disable(){
+void Program::unbind(){
     glUseProgram(0);
     _enabled = false;
 }
 
 int Program::getUniformLocation(const char* uniform_name){
     
-    needEnabled();
+    require_bound("Program", "getUniformLocation");
     int location = glGetUniformLocation(_id, uniform_name);
     if(location == -1) throw std::runtime_error(std::string("[getUniformLocation] Error finding ") + uniform_name);
 
@@ -161,6 +161,11 @@ template<> void Program::setUniform<glm::ivec1>(const char* uniform_name, const 
 template<> void Program::setUniform<glm::uvec1>(const char* uniform_name, const glm::uvec1& uniform_value){
     int location = getUniformLocation(uniform_name);
     glUniform1ui(location, uniform_value.x);
+}
+
+template<> void Program::setUniform<int>(const char* uniform_name, const int& uniform_value){
+    int location = getUniformLocation(uniform_name);
+    glUniform1i(location, uniform_value);
 }
 
 /*Square matrices*/
