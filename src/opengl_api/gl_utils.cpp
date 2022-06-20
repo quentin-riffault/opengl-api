@@ -53,3 +53,29 @@ std::vector<float> gl_utils::random_colors(ssize_t n_colors, float opacity){
 
     return colors;
 }
+
+std::vector<float> gl_utils::random_colored_triangles(ssize_t n_triangles, float opacity){
+    std::vector<float> vertices;
+    const ssize_t components = n_triangles * (3*3 + 3*4);
+    const ssize_t n_points = 3*n_triangles;
+    vertices.reserve(components);
+    
+
+    std::random_device rd;  // Will be used to obtain a seed for the random number engine
+    std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
+    std::uniform_real_distribution<> dis(0.0, 1.0);
+
+    for(int n = 0; n < n_points; n++){
+        vertices.push_back((dis(gen))); // x
+        vertices.push_back((dis(gen))); // y
+        vertices.push_back((dis(gen))); // z
+        vertices.push_back((dis(gen))); // r
+        vertices.push_back((dis(gen))); // g
+        vertices.push_back((dis(gen))); // b
+        vertices.push_back(opacity);    // alpha
+    }
+
+    std::cout << vertices.size() << std::endl;
+
+    return vertices;
+}

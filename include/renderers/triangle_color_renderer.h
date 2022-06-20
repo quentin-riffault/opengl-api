@@ -6,7 +6,8 @@ class TriangleColorRenderer : public Renderer{
 public:
 
     TriangleColorRenderer();
-    TriangleColorRenderer(const std::vector<float>& vertices, const std::vector<float>& colors = gl_utils::random_colors(9));
+    TriangleColorRenderer(const std::vector<float>& data);
+    TriangleColorRenderer(const std::vector<float>& vertices, const std::vector<float>& colors);
     virtual ~TriangleColorRenderer();
 
     virtual void render() override;

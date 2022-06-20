@@ -11,7 +11,7 @@ find_package(GLEW REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(OpenGL REQUIRED)
 
-add_definitions("-Wall -Wextra")
+add_definitions("-Wall -Wextra -g")
 
 add_executable(
 	Opengl_Boilerplate 

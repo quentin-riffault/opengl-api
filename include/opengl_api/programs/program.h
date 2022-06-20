@@ -15,7 +15,7 @@ public:
     void enable();
     void disable();
 
-   template<typename T> void setUniform(const char* uniform_name, const T& uniform_value){
+   template<typename T> void setUniform(const char*, const T&){
        throw std::runtime_error("[Program] setUniform : Type not supported");
    }
 

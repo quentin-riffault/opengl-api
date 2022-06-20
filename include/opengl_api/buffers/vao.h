@@ -19,14 +19,34 @@ class VAO : public Bindable{
 
 		template<typename T, uint N> void set_vbo(const uint& index, const std::array<T, N>& values){
 			if(index >= _vbos.size()) throw std::runtime_error("VBO Index overflow");
-			_vbos[index]->setData<T, N>(values);
-			_vbos[index]->setAttribPointer<T>(index);
+			const std::shared_ptr<VBO>& vbo = _vbos[index];
+			vbo->setData<T, N>(values);
+			vbo->setAttribPointer<T>(index);
 		}
 		
 		template<typename T> void set_vbo(const uint& index, const std::vector<T>& values){
 			if(index >= _vbos.size()) throw std::runtime_error("VBO Index overflow");
-			_vbos[index]->setData<T>(values);
-			_vbos[index]->setAttribPointer<T>(index);
+			const std::shared_ptr<VBO>& vbo = _vbos[index];
+			vbo->setData<T>(values);
+			vbo->setAttribPointer<T>(index);
+		}
+
+		template<typename T> void set_vbo(const uint & index, const std::vector<T>& values, const std::function<void(void)>& attributor){
+			if(index >= _vbos.size()) throw std::runtime_error("VBO Index overflow");
+			const std::shared_ptr<VBO>& vbo = _vbos[index];
+			vbo->setData<T>(values);
+			vbo->bind();
+			attributor();
+			vbo->unbind();
+		}
+		
+		template<typename T, std::size_t N> void set_vbo(const uint & index, const std::array<T, N>& values, const std::function<void(void)>& attributor){
+			if(index >= _vbos.size()) throw std::runtime_error("VBO Index overflow");
+			const std::shared_ptr<VBO>& vbo = _vbos[index];
+			vbo->setData<T, N>(values);
+			vbo->bind();
+			attributor();
+			vbo->unbind();
 		}
 
 		void set_ebo(const std::vector<uint>& indices){
