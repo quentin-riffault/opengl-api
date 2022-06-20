@@ -13,8 +13,8 @@ public:
 
 private:
 
-    const std::string FSHADER_PATH = "/data/Projets/opengl_boilerplate/src/shaders/simple.f.glsl";
-    const std::string VSHADER_PATH = "/data/Projets/opengl_boilerplate/src/shaders/simple.v.glsl";
+    const std::string FSHADER_PATH = TEST_SHADER_PATH+"/simple.f.glsl";
+    const std::string VSHADER_PATH = TEST_SHADER_PATH+"/simple.v.glsl";
     const std::vector<uint> indices = {  
         0, 1, 2,
     };  

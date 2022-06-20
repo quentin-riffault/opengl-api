@@ -11,31 +11,40 @@ class VAO : public Bindable{
 
 		void bind() override{
 			glBindVertexArray(_id);
+			_enabled = true;
 		}
 
 		void unbind() override{
 			glBindVertexArray(0);
+			_enabled = false;
 		}
 
-		template<typename T, uint N> void set_vbo(const uint& index, const std::array<T, N>& values){
+		template<typename T, uint N> void set_vbo(const uint& index, const std::array<T, N>& values, const size_t& n_components = 3){
 			if(index >= _vbos.size()) throw std::runtime_error("VBO Index overflow");
 			const std::shared_ptr<VBO>& vbo = _vbos[index];
+
+			vbo->bind();
 			vbo->setData<T, N>(values);
-			vbo->setAttribPointer<T>(index);
+			vbo->setAttribPointer<T>(index, n_components);
+			vbo->unbind();
 		}
 		
-		template<typename T> void set_vbo(const uint& index, const std::vector<T>& values){
+		template<typename T> void set_vbo(const uint& index, const std::vector<T>& values, const size_t& n_components = 3){
 			if(index >= _vbos.size()) throw std::runtime_error("VBO Index overflow");
 			const std::shared_ptr<VBO>& vbo = _vbos[index];
+
+			vbo->bind();
 			vbo->setData<T>(values);
-			vbo->setAttribPointer<T>(index);
+			vbo->setAttribPointer<T>(index, n_components);
+			vbo->unbind();
 		}
 
 		template<typename T> void set_vbo(const uint & index, const std::vector<T>& values, const std::function<void(void)>& attributor){
 			if(index >= _vbos.size()) throw std::runtime_error("VBO Index overflow");
 			const std::shared_ptr<VBO>& vbo = _vbos[index];
-			vbo->setData<T>(values);
+
 			vbo->bind();
+			vbo->setData<T>(values);
 			attributor();
 			vbo->unbind();
 		}
@@ -43,8 +52,9 @@ class VAO : public Bindable{
 		template<typename T, std::size_t N> void set_vbo(const uint & index, const std::array<T, N>& values, const std::function<void(void)>& attributor){
 			if(index >= _vbos.size()) throw std::runtime_error("VBO Index overflow");
 			const std::shared_ptr<VBO>& vbo = _vbos[index];
-			vbo->setData<T, N>(values);
+
 			vbo->bind();
+			vbo->setData<T, N>(values);
 			attributor();
 			vbo->unbind();
 		}
@@ -64,7 +74,7 @@ class VAO : public Bindable{
 			glDrawElements(mode, _ebo.size(), GL_UNSIGNED_INT, 0);
 			unbind();
 		}
-
+    
 	private:
     	EBO _ebo;
     	std::vector<std::shared_ptr<VBO>> _vbos;

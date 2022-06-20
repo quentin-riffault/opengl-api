@@ -2,6 +2,8 @@
 
 #include "gl_api.h"
 
+const std::string TEST_SHADER_PATH = "../src/shaders";
+
 class Renderer {
 
 public:
