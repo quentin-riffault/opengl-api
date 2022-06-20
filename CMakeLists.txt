@@ -20,6 +20,7 @@ add_executable(
 	src/window.cpp
 	src/renderers/triangle_renderer.cpp
 	src/renderers/triangle_color_renderer.cpp
+	src/renderers/triangle_tex_renderer.cpp
 
 	src/opengl_api/gl_utils.cpp
 
@@ -29,6 +30,9 @@ add_executable(
 
 	src/opengl_api/programs/shader.cpp
 	src/opengl_api/programs/program.cpp
+
+	src/opengl_api/textures/image.cpp
+	src/opengl_api/textures/texture.cpp
 
 	test/test.cpp)
 

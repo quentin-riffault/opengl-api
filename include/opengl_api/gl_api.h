@@ -7,3 +7,4 @@
 #include "buffers/ebo.h"
 #include "programs/shader.h"
 #include "programs/program.h"
+#include "textures/texture.h"
