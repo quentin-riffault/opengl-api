@@ -15,6 +15,10 @@ CompanionCubeRenderer::CompanionCubeRenderer() : _tex("../resources/cc.jpg"), _p
 	_prog.bind();
 	_prog.setUniform("companionTexture", 0);
 	_prog.unbind();
+
+	scale(glm::vec3(0.5f));
+	translate(glm::vec3(-0.5f));
+
 }
 
 CompanionCubeRenderer::~CompanionCubeRenderer(){
@@ -29,7 +33,6 @@ void CompanionCubeRenderer::render(){
 
     _prog.setUniform("pvm", pvm());
 	
-    glPolygonMode(GL_FRONT_AND_BACK, (wireframe) ? GL_LINE : GL_FILL );
 	_vao.draw();
 
 	_vao.unbind();

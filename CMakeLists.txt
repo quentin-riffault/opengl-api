@@ -18,6 +18,8 @@ add_executable(
 	main.cpp
 
 	src/window.cpp
+	src/camera.cpp
+	
 	src/renderers/triangle_renderer.cpp
 	src/renderers/triangle_color_renderer.cpp
 	src/renderers/triangle_tex_renderer.cpp

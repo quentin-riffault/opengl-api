@@ -37,7 +37,6 @@ void TriangleTexRenderer::render(){
         _tex2.setTexunit(1);
         
         _prog.enable();
-        glPolygonMode(GL_FRONT_AND_BACK, (wireframe) ? GL_LINE : GL_FILL );
 
         //double time = glfwGetTime();
         double r = 1.0f;

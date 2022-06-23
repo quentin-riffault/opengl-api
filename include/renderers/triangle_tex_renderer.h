@@ -23,9 +23,9 @@ private:
         0, 1, 2,
     };
 
+    Program _prog;
     Texture _tex1;
     Texture _tex2;
-    Program _prog;
     VAO _vao;
 
 };

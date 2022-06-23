@@ -81,5 +81,4 @@ class VAO : public Bindable{
 	private:
     	EBO _ebo;
     	std::vector<std::shared_ptr<VBO>> _vbos;
-
 };

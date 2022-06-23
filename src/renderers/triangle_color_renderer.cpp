@@ -56,7 +56,6 @@ TriangleColorRenderer::~TriangleColorRenderer(){
 
 void TriangleColorRenderer::render(){
         _prog.enable();
-        glPolygonMode(GL_FRONT_AND_BACK, (wireframe) ? GL_LINE : GL_FILL );
 
         double time = glfwGetTime();
         double r = cos(time);

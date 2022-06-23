@@ -35,6 +35,14 @@ void AppWindow::error_callback(int error, const char *description) {
     throw std::runtime_error(msg);
 }
 
+void AppWindow::mouse_callback(GLFWwindow* /*win*/, int /*button*/, int /*action*/, int /*mods*/){
+  
+} 
+
+void AppWindow::scroll_callback(GLFWwindow* /*window*/, double /*xoffset*/, double /*yoffset*/){
+    
+}
+
 void AppWindow::resize_callback(GLFWwindow* /*win*/, int height, int width) {
     glViewport(0, 0, width, height);
 }
@@ -44,8 +52,10 @@ void AppWindow::render(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
 
+    _cam.update_pv();
+
     for(const auto& r : _renderers){
-        r.second->render();
+        r.second->render_call();
     }
 
 }
@@ -71,18 +81,18 @@ void AppWindow::controls() {
 }
 
 void AppWindow::moveControls(){
-    if(glfwGetKey(_win, GLFW_KEY_PAGE_UP) == GLFW_PRESS) moveView(Direction::UP);
-    if(glfwGetKey(_win, GLFW_KEY_PAGE_DOWN) == GLFW_PRESS) moveView(Direction::DOWN);
-    if(glfwGetKey(_win, GLFW_KEY_W) == GLFW_PRESS) moveView(Direction::FORWARD);
-    if(glfwGetKey(_win, GLFW_KEY_S) == GLFW_PRESS) moveView(Direction::BACKWARDS);
+    if(glfwGetKey(_win, GLFW_KEY_PAGE_UP) == GLFW_PRESS) moveView(Direction::FORWARD);
+    if(glfwGetKey(_win, GLFW_KEY_PAGE_DOWN) == GLFW_PRESS) moveView(Direction::BACKWARDS);
+    if(glfwGetKey(_win, GLFW_KEY_W) == GLFW_PRESS) moveView(Direction::UP);
+    if(glfwGetKey(_win, GLFW_KEY_S) == GLFW_PRESS) moveView(Direction::DOWN);
     if(glfwGetKey(_win, GLFW_KEY_A) == GLFW_PRESS) moveView(Direction::LEFT);
     if(glfwGetKey(_win, GLFW_KEY_D) == GLFW_PRESS) moveView(Direction::RIGHT);
 
 
-    if(glfwGetKey(_win, GLFW_KEY_O) == GLFW_PRESS) moveView(Direction::ROLL_MINUS);
-    if(glfwGetKey(_win, GLFW_KEY_P) == GLFW_PRESS) moveView(Direction::ROLL_PLUS);
-    if(glfwGetKey(_win, GLFW_KEY_L) == GLFW_PRESS) moveView(Direction::PITCH_MINUS);
-    if(glfwGetKey(_win, GLFW_KEY_M) == GLFW_PRESS) moveView(Direction::PITCH_PLUS);
+    if(glfwGetKey(_win, GLFW_KEY_O) == GLFW_PRESS || glfwGetKey(_win, GLFW_KEY_UP) == GLFW_PRESS) moveView(Direction::ROLL_MINUS);
+    if(glfwGetKey(_win, GLFW_KEY_P) == GLFW_PRESS || glfwGetKey(_win, GLFW_KEY_DOWN) == GLFW_PRESS) moveView(Direction::ROLL_PLUS);
+    if(glfwGetKey(_win, GLFW_KEY_L) == GLFW_PRESS || glfwGetKey(_win, GLFW_KEY_RIGHT) == GLFW_PRESS) moveView(Direction::PITCH_MINUS);
+    if(glfwGetKey(_win, GLFW_KEY_M) == GLFW_PRESS || glfwGetKey(_win, GLFW_KEY_LEFT) == GLFW_PRESS) moveView(Direction::PITCH_PLUS);
     if(glfwGetKey(_win, GLFW_KEY_B) == GLFW_PRESS) moveView(Direction::YAW_MINUS);
     if(glfwGetKey(_win, GLFW_KEY_N) == GLFW_PRESS) moveView(Direction::YAW_PLUS);
 }

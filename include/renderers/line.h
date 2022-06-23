@@ -14,15 +14,15 @@ class Line : public Renderer{
 		
 			switch(a){
 				case X: return std::vector<float>({
-					-X_AXIS.x, -X_AXIS.y, -X_AXIS.z,	1.0f, 0.5f, 0.5f, 1.0f,
+					-X_AXIS.x, -X_AXIS.y, -X_AXIS.z,	0.0f, 1.0f, 1.0f, 1.0f,
 					X_AXIS.x, X_AXIS.y, X_AXIS.z,		1.0f, 0.0f, 0.0f, 1.0f
 				});
 				case Y: return std::vector<float>({
-					-Y_AXIS.x, -Y_AXIS.y, -Y_AXIS.z,	0.5f, 1.0f, 0.5f, 1.0f,
+					-Y_AXIS.x, -Y_AXIS.y, -Y_AXIS.z,	1.0f, 0.0f, 1.0f, 1.0f,
 					Y_AXIS.x, Y_AXIS.y, Y_AXIS.z,		0.0f, 1.0f, 0.0f, 1.0f
 				});
 				case Z: return std::vector<float>({
-					-Z_AXIS.x, -Z_AXIS.y, -Z_AXIS.z,	0.5f, 0.5f, 1.0f, 1.0f,
+					-Z_AXIS.x, -Z_AXIS.y, -Z_AXIS.z,	1.0f, 1.0f, 0.0f, 1.0f,
 					Z_AXIS.x, Z_AXIS.y, Z_AXIS.z,		0.0f, 0.0f, 1.0f, 1.0f
 				});
 				default:
