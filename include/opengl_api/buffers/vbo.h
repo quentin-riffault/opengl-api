@@ -11,13 +11,13 @@ public:
 
     void bind() override{
         glBindBuffer(GL_ARRAY_BUFFER, _id);
-        gl_utils::check_errors();
+        gl_utils::check_errors(__FILE__, __LINE__);
         _enabled = true;
     }
 
     void unbind() override{
         glBindBuffer(GL_ARRAY_BUFFER, 0);
-        gl_utils::check_errors();
+        gl_utils::check_errors(__FILE__, __LINE__);
         _enabled = false;
     }
 
@@ -28,9 +28,9 @@ public:
 
         int stride = n_components*sizeof(T);
         glVertexAttribPointer(index, n_components, _dataType, GL_FALSE, stride, nullptr);
-        gl_utils::check_errors();
+        gl_utils::check_errors(__FILE__, __LINE__);
         glEnableVertexAttribArray(index);
-        gl_utils::check_errors();
+        gl_utils::check_errors(__FILE__, __LINE__);
     }
 
     template<typename T, std::size_t N> void setData(const std::array<T, N>& array, GLenum mode=GL_STATIC_DRAW){
@@ -38,7 +38,7 @@ public:
         _dataSize = array.size();
         _dataType = AttributeProperties<T>::dataType;
         glBufferData(_type, _dataSize*sizeof(T), array.data(), mode);
-        gl_utils::check_errors();
+        gl_utils::check_errors(__FILE__, __LINE__);
     }
 
     template<typename T> void setData(const std::vector<T>& array, GLenum mode=GL_STATIC_DRAW) {
@@ -46,7 +46,7 @@ public:
         _dataSize = array.size();
         _dataType = AttributeProperties<T>::dataType;
         glBufferData(_type, _dataSize*sizeof(T), array.data(), mode);
-        gl_utils::check_errors();
+        gl_utils::check_errors(__FILE__, __LINE__);
     }
 
 private:

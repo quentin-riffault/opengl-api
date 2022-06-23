@@ -82,8 +82,7 @@ std::vector<float> gl_utils::random_colored_triangles(ssize_t n_triangles, float
     return vertices;
 }
 
-void gl_utils::check_errors()
-{
+void gl_utils::check_errors(const std::string& filename, const int& line){
 
 #ifdef GL_NO_CHECK
     return;
@@ -92,7 +91,7 @@ void gl_utils::check_errors()
     GLenum error = glGetError();
     if (error != GL_NO_ERROR)
     {
-        std::string errmsg = "OpenGL error [" + std::to_string(error) + "] : " + (const char *)glewGetErrorString(error);
+        const std::string errmsg = "OpenGL error [File " + filename + ", line " + std::to_string(line) +"][" + std::to_string(error) + "] : " + (const char *)glewGetErrorString(error); 
 #ifdef GL_DEBUG
         throw std::runtime_error(errmsg);
 #else

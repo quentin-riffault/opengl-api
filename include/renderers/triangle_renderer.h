@@ -21,5 +21,4 @@ private:
 
     Program _prog;
     VAO _vao;
-
 };

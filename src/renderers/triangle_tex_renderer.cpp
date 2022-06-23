@@ -47,6 +47,8 @@ void TriangleTexRenderer::render(){
 
 
         _prog.setUniform<glm::vec4>("color_modifier", glm::vec4(r, g, b, a));
+        _prog.setUniform("pvm", pvm());
+
         _vao.draw();
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         _prog.disable();

@@ -27,6 +27,48 @@
 #include <unistd.h>
 #include <functional>
 
+
 #include "gl_utils.h"
+
+const glm::vec3 X_AXIS = glm::vec3(1.0f, 0.0f, 0.0f);
+const glm::vec3 Y_AXIS = glm::vec3(0.0f, 1.0f, 0.0f);
+const glm::vec3 Z_AXIS = glm::vec3(0.0f, 0.0f, 1.0f);
+
+const glm::vec3 XY_AXIS = X_AXIS + Y_AXIS;
+const glm::vec3 YX_AXIS = XY_AXIS;
+
+const glm::vec3 XZ_AXIS = X_AXIS + Z_AXIS;
+const glm::vec3 ZX_AXIS = XZ_AXIS;
+
+const glm::vec3 YZ_AXIS = Y_AXIS + Z_AXIS;
+const glm::vec3 ZY_AXIS = YZ_AXIS;
+
+const glm::vec3 XYZ_AXIS = glm::vec3(1.0f);
+const glm::vec3 XZY_AXIS = XYZ_AXIS;
+const glm::vec3 YXZ_AXIS = XYZ_AXIS;
+const glm::vec3 ZXY_AXIS = XYZ_AXIS;
+const glm::vec3 ZYX_AXIS = XYZ_AXIS;
+const glm::vec3 YZX_AXIS = XYZ_AXIS;
+
+enum Axis{
+	X, Y, Z
+};
+
+enum Direction{
+	FORWARD,
+	BACKWARDS,
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+	PITCH_PLUS,
+	PITCH_MINUS,
+	ROLL_PLUS,
+	ROLL_MINUS,
+	YAW_PLUS,
+	YAW_MINUS,
+	ZOOM_PLUS,
+	ZOOM_MINUS
+};
 
 #define CUSTOM_GLEW_VERSION GLEW_VERSION_4_4

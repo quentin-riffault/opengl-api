@@ -11,9 +11,6 @@ AppWindow::AppWindow(int width, int height, const std::string& title){
     setAsCurrentContext();
 
     glfwSetFramebufferSizeCallback(_win, AppWindow::resize_callback);
-
-    _default = new Program(DEFAULT_FSHADER_PATH, DEFAULT_VSHADER_PATH);
-
 }
 
 AppWindow::~AppWindow() {
@@ -44,46 +41,12 @@ void AppWindow::resize_callback(GLFWwindow* /*win*/, int height, int width) {
 
 void AppWindow::render(){
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_DEPTH_TEST);
 
-    #ifdef RENDER_OVERRIDE
-
-        float vertices[] = {
-            0.5f, 0.0f, 0.0f,
-            0.0f, 0.5f, 0.0f,
-            0.0f, 0.0f, 0.5f
-        };
-
-
-        //uint vao = 0;
-        VAO vao;
-        VBO vbo;
-
-        vao.bind();
-        
-        vbo.setData<float>(sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-        vbo.bind(); 
-        // index, n_elements(1/2/3/4), type(enum), stride size
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), nullptr);
-        glEnableVertexAttribArray(0);
-
-        vbo.unbind();
-        _default->enable();
-
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-
-        _default->disable();
-        vao.unbind();
-
-
-    #else
-
-        for(const auto& r : _renderers){
-            r.second->render();
-        }
-
-    #endif
+    for(const auto& r : _renderers){
+        r.second->render();
+    }
 
 }
 
@@ -100,9 +63,28 @@ bool AppWindow::renderLoop(){
 }
 
 void AppWindow::controls() {
-    if(glfwGetKey(_win, GLFW_KEY_ESCAPE) == GLFW_PRESS){
-        glfwSetWindowShouldClose(_win, GLFW_TRUE);
-    }
+
+    if(glfwGetKey(_win, GLFW_KEY_ESCAPE) == GLFW_PRESS) close();
+    if(glfwGetKey(_win, GLFW_KEY_ENTER) == GLFW_PRESS) setWireframe();
+    moveControls();
+
+}
+
+void AppWindow::moveControls(){
+    if(glfwGetKey(_win, GLFW_KEY_PAGE_UP) == GLFW_PRESS) moveView(Direction::UP);
+    if(glfwGetKey(_win, GLFW_KEY_PAGE_DOWN) == GLFW_PRESS) moveView(Direction::DOWN);
+    if(glfwGetKey(_win, GLFW_KEY_W) == GLFW_PRESS) moveView(Direction::FORWARD);
+    if(glfwGetKey(_win, GLFW_KEY_S) == GLFW_PRESS) moveView(Direction::BACKWARDS);
+    if(glfwGetKey(_win, GLFW_KEY_A) == GLFW_PRESS) moveView(Direction::LEFT);
+    if(glfwGetKey(_win, GLFW_KEY_D) == GLFW_PRESS) moveView(Direction::RIGHT);
+
+
+    if(glfwGetKey(_win, GLFW_KEY_O) == GLFW_PRESS) moveView(Direction::ROLL_MINUS);
+    if(glfwGetKey(_win, GLFW_KEY_P) == GLFW_PRESS) moveView(Direction::ROLL_PLUS);
+    if(glfwGetKey(_win, GLFW_KEY_L) == GLFW_PRESS) moveView(Direction::PITCH_MINUS);
+    if(glfwGetKey(_win, GLFW_KEY_M) == GLFW_PRESS) moveView(Direction::PITCH_PLUS);
+    if(glfwGetKey(_win, GLFW_KEY_B) == GLFW_PRESS) moveView(Direction::YAW_MINUS);
+    if(glfwGetKey(_win, GLFW_KEY_N) == GLFW_PRESS) moveView(Direction::YAW_PLUS);
 }
 
 void AppWindow::InitGLFW(){

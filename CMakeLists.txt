@@ -21,6 +21,9 @@ add_executable(
 	src/renderers/triangle_renderer.cpp
 	src/renderers/triangle_color_renderer.cpp
 	src/renderers/triangle_tex_renderer.cpp
+	src/renderers/companion_cube_renderer.cpp
+	src/renderers/line.cpp
+	src/renderers/trihedron_renderer.cpp
 
 	src/opengl_api/gl_utils.cpp
 

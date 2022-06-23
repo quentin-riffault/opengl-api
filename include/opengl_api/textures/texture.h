@@ -14,13 +14,13 @@ class Texture : public Bindable{
 		void setParameteri(const GLenum& parameter, const GLenum& value){
 			require_bound("Texture", "setParameteri");
 			glTexParameteri(_texType, parameter, value);
-			gl_utils::check_errors();
+			gl_utils::check_errors(__FILE__, __LINE__);
 		}
 
 		void setTexunit(uint texunit){
 			
 			glActiveTexture(GL_TEXTURE0 + texunit);
-			gl_utils::check_errors();
+			gl_utils::check_errors(__FILE__, __LINE__);
 			bind();
 		}
 
