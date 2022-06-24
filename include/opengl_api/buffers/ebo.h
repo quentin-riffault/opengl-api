@@ -10,7 +10,7 @@ class EBO : public Bindable{
 		void bind() override {
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _id);
     		gl_utils::check_errors(__FILE__, __LINE__);
-			_enabled = true;
+			glGetIntegerv(GL_ELEMENT_ARRAY_BUFFER_BINDING, &_enabled);
 		}
 
 		template<uint N> void setData(const std::array<uint, N>& indices, GLenum mode=GL_STATIC_DRAW){
@@ -30,10 +30,10 @@ class EBO : public Bindable{
 		void unbind() override {
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     		gl_utils::check_errors(__FILE__, __LINE__);
-			_enabled = false;
+			glGetIntegerv(GL_ELEMENT_ARRAY_BUFFER_BINDING, &_enabled);
 		}
 
-		uint size(){
+		uint size() const{
 			return _size;
 		}
 

@@ -12,13 +12,13 @@ public:
     void bind() override{
         glBindBuffer(GL_ARRAY_BUFFER, _id);
         gl_utils::check_errors(__FILE__, __LINE__);
-        _enabled = true;
+		glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &_enabled);
     }
 
     void unbind() override{
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         gl_utils::check_errors(__FILE__, __LINE__);
-        _enabled = false;
+		glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &_enabled);
     }
 
     template <typename T> void setAttribPointer(const GLuint& index, size_t n_components = 3){

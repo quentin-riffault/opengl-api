@@ -66,13 +66,13 @@ void Program::link(){
 void Program::bind(){
    glUseProgram(_id);
     gl_utils::check_errors(__FILE__, __LINE__);
-   _enabled = true; 
+    glGetIntegerv(GL_CURRENT_PROGRAM, &_enabled);
 }
 
 void Program::unbind(){
     glUseProgram(0);
     gl_utils::check_errors(__FILE__, __LINE__);
-    _enabled = false;
+    glGetIntegerv(GL_CURRENT_PROGRAM, &_enabled);
 }
 
 int Program::getUniformLocation(const char* uniform_name){

@@ -9,13 +9,14 @@ public:
     virtual void unbind() = 0;
     virtual ~Bindable(){};
     void require_bound(const std::string& module = "", const std::string& operation=""){
-        if(! _enabled) {
+        if(_enabled != static_cast<GLint>(_id)) {
+            std::cerr << module << " currently bound : " << _enabled << ", " << module << " id = " << _id << std::endl;
             const std::string err = "[" + module +"] Element required to be bound to apply operation " + operation; 
             throw std::runtime_error(err);
         }
     };
 
 protected:
-    uint _id;
-    bool _enabled;
+    GLuint _id;
+    GLint _enabled;
 };

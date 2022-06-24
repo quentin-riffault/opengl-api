@@ -12,13 +12,13 @@ class VAO : public Bindable{
 		void bind() override{
 			glBindVertexArray(_id);
     		gl_utils::check_errors(__FILE__, __LINE__);
-			_enabled = true;
+			glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &_enabled);
 		}
 
 		void unbind() override{
 			glBindVertexArray(0);
     		gl_utils::check_errors(__FILE__, __LINE__);
-			_enabled = false;
+			glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &_enabled);
 		}
 
 		template<typename T, uint N> void set_vbo(const uint& index, const std::array<T, N>& values, const size_t& n_components = 3){
