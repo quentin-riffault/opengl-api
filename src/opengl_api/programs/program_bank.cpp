@@ -16,8 +16,6 @@ std::shared_ptr<Program> ProgramBank::getProgramInstance(const std::string& prog
 		return _bank[program_identifier];		
 	}
 
-	std::cout << "[getProgramInstance] Loading new " << program_identifier << " program instance" << std::endl;
-
 	const std::string vshader = shader_directory + "/" + program_identifier+".v.glsl";
 	const std::string fshader = shader_directory + "/" + program_identifier+".f.glsl"; 
 
