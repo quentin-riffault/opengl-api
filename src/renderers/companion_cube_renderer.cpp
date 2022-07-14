@@ -1,6 +1,7 @@
 #include "renderers/companion_cube_renderer.h"
 
-CompanionCubeRenderer::CompanionCubeRenderer() : _tex("../resources/cc.jpg"), _prog (TEST_SHADER_PATH+"/companion.f.glsl", TEST_SHADER_PATH+"/companion.v.glsl") {
+CompanionCubeRenderer::CompanionCubeRenderer(){
+	
 	_vao.bind();
 	_vao.set_vbo(0, vertices, [](){
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, (3+2)*sizeof(float), nullptr);
@@ -12,12 +13,18 @@ CompanionCubeRenderer::CompanionCubeRenderer() : _tex("../resources/cc.jpg"), _p
 	_vao.set_ebo(indices);
 	_vao.unbind();
 
-	_prog.bind();
-	_prog.setUniform("companionTexture", 0);
-	_prog.unbind();
-
 	scale(glm::vec3(0.5f));
 	translate(glm::vec3(-0.5f));
+
+}
+
+void CompanionCubeRenderer::setup_after_registration(){
+	_prog = _pbank->getProgramInstance("companion");
+	_tex = _tbank->getTextureInstance("cc.jpg");
+	
+	_prog->enable();
+	_prog->setUniform("companionTexture", 0);
+	_prog->disable();
 
 }
 
@@ -26,15 +33,15 @@ CompanionCubeRenderer::~CompanionCubeRenderer(){
 }
 
 void CompanionCubeRenderer::render(){
-	_tex.setTexunit(0);
+	_tex->setTexunit(0);
 	
-	_prog.enable();
+	_prog->enable();
 	_vao.bind();
 
-    _prog.setUniform("pvm", pvm());
+    _prog->setUniform("pvm", pvm());
 	
 	_vao.draw();
 
 	_vao.unbind();
-	_prog.disable();
+	_prog->disable();
 }

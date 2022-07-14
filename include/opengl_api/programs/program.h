@@ -9,7 +9,7 @@ public:
 
     Program() = delete;
     Program(const std::string& fshader, const std::string& vshader);
-    Program(std::shared_ptr<Shader> vshader, std::shared_ptr<Shader> fshader);
+    Program(std::shared_ptr<Shader> fshader, std::shared_ptr<Shader> vshader);
 
     virtual ~Program();
 

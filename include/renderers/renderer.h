@@ -12,16 +12,46 @@ public:
 
     Renderer() = default;
     
-    
+    /**
+     * @brief Set the camera object for the renderer and its slaves
+     * @param cam 
+     */
     virtual void set_camera(const Camera* cam) { 
         _cam = cam;
-
         for(auto& r : _slaves){
             r->set_camera(cam);
         }        
-
-
     }
+
+   /**
+    * @brief Set the texture bank object for the renderer and its slaves
+    * @param t 
+    */
+    virtual void set_texture_bank(TextureBank* t){ 
+        std::cout << this << " (tbank)=> " << t << std::endl;
+        _tbank = t; 
+        for(auto& r : _slaves){
+            r->set_texture_bank(t);
+        }        
+    }
+
+    /**
+     * @brief Set the program bank object for the renderer and its slaves
+     * @param p 
+     */
+    virtual void set_program_bank(ProgramBank* p){
+        std::cout << this << " (pbank)=> " << p << std::endl;
+        _pbank = p; 
+        for(auto& r : _slaves){
+            r->set_program_bank(p);
+        }        
+    }
+
+    /**
+     * @brief Setup the renderer after being registered in the window renderer manager
+     * 
+    */
+    virtual void setup_after_registration(){} 
     
 
 public:
@@ -90,6 +120,7 @@ public:
 
 
 
+
 protected:
     /**
      * @brief Complete render with a given program.
@@ -107,9 +138,12 @@ protected:
 
 protected:
 
-    glm::mat4 _base = glm::mat4(1.0f); // < Initial model state
-    glm::mat4 _model = _base; // < Current model state
-    std::vector<Renderer*> _slaves; // < Renderers controlled by this renderer
+    glm::mat4 _base = glm::mat4(1.0f); // Initial model state
+    glm::mat4 _model = _base; // Current model state
+    std::vector<Renderer*> _slaves; // Renderers controlled by this renderer
+    ProgramBank* _pbank; // Pointer to program bank, forbidden to delete
+    TextureBank* _tbank; // Pointer to texture bank, forbidden to delete
+
 
     const Camera* _cam = nullptr;
     bool _wireframe = false;

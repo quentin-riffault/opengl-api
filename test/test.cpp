@@ -13,8 +13,9 @@ void OGLBPTest::test(){
 
     //triangles(win); 
     //lines(win);
-    trihedron(win);
+    //trihedron(win);
     companion(win);
+
     while(win.renderLoop());
 }
 

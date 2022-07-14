@@ -17,6 +17,20 @@ add_executable(
 	Opengl_Boilerplate 
 	main.cpp
 
+	src/opengl_api/gl_utils.cpp
+
+	src/opengl_api/buffers/vbo.cpp
+	src/opengl_api/buffers/ebo.cpp
+	src/opengl_api/buffers/vao.cpp
+
+	src/opengl_api/programs/shader.cpp
+	src/opengl_api/programs/program.cpp
+	src/opengl_api/programs/program_bank.cpp
+
+	src/opengl_api/textures/image.cpp
+	src/opengl_api/textures/texture.cpp
+	src/opengl_api/textures/texture_bank.cpp
+	
 	src/window.cpp
 	src/camera.cpp
 	
@@ -26,18 +40,6 @@ add_executable(
 	src/renderers/companion_cube_renderer.cpp
 	src/renderers/line.cpp
 	src/renderers/trihedron_renderer.cpp
-
-	src/opengl_api/gl_utils.cpp
-
-	src/opengl_api/buffers/vbo.cpp
-	src/opengl_api/buffers/ebo.cpp
-	src/opengl_api/buffers/vao.cpp
-
-	src/opengl_api/programs/shader.cpp
-	src/opengl_api/programs/program.cpp
-
-	src/opengl_api/textures/image.cpp
-	src/opengl_api/textures/texture.cpp
 
 	test/test.cpp)
 

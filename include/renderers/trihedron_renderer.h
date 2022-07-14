@@ -16,7 +16,7 @@ class TrihedronRenderer : public Renderer{
 		const std::string FSHADER_PATH = TEST_SHADER_PATH+"/line_shader.f.glsl";
 		const std::string VSHADER_PATH = TEST_SHADER_PATH+"/line_shader.v.glsl";
 
-    	Program _prog;
+		std::shared_ptr<Program> _prog = std::make_shared<Program>(FSHADER_PATH, VSHADER_PATH);
 		
 		Line axes[3] = {
 			Line(Axis::X, _prog),

@@ -2,6 +2,9 @@
 #include <glm/glm.hpp>
 #include <string>
 #include <vector>
+#include <unordered_map>
+
+template<typename T> using StringMap = std::unordered_map<std::string, T>;
 
 namespace gl_utils{
     std::string readfile(const std::string& file_path);

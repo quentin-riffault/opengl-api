@@ -6,7 +6,7 @@ class Line : public Renderer{
 	public:
 
 		Line(const std::vector<float>& data);
-		Line(const Axis& ax, const Program& p);
+		Line(const Axis& ax, std::shared_ptr<Program> p);
 
 		~Line();
 
@@ -41,7 +41,7 @@ class Line : public Renderer{
 	const std::vector<uint> indices = {0, 1};
 
 
-    Program _prog;
+    std::shared_ptr<Program> _prog;
     VAO _vao;
 
 };

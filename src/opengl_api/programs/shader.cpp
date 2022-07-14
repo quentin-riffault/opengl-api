@@ -5,9 +5,8 @@ Shader::Shader(const std::string &shader_source_path, const GLenum& shader_type)
     std::string shader_source;
 
     try{
-        std::cout << "======== Shader source beg ========" << std::endl;
+        std::cout << "Compiling Shader " << shader_source_path << "... ";
         shader_source = gl_utils::readfile(shader_source_path);
-        std::cout << "======== Shader source end ========" << std::endl;
     }catch(const std::runtime_error& e){
        std::cerr << e.what() << std::endl;
        throw std::runtime_error("Could not compile shader - Source not found");
@@ -32,7 +31,7 @@ void Shader::compileSources(const char* shader_source){
     glGetShaderiv(_id, GL_COMPILE_STATUS, &success);
 
     if(success){
-        std::cout << "Shader compilation success" << std::endl;
+        std::cout << "Success" << std::endl;
         return;
     }
 

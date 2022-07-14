@@ -4,6 +4,8 @@
 #include "renderers/renderer.h"
 #include "camera.h"
 
+using RendererMap = StringMap<std::shared_ptr<Renderer>>;
+
 class AppWindow{
 public:
 	AppWindow(int width = 300, int height = 300, const std::string& title = "AppWindow");
@@ -20,9 +22,17 @@ public:
             std::cerr << "[addRenderer] Ignoring new " << id << " renderer as one already exists" << std::endl;
             return;
         }
+
+        std::cout << "[addRenderer] New renderer " << id << std::endl;
+
         r->set_camera(&_cam);
+        r->set_program_bank(&_pbank);
+        r->set_texture_bank(&_tbank);
+        
         _renderers[id] = r; 
-        }
+        r->setup_after_registration();
+    }
+
     void removeRenderer(const std::string& id) { _renderers.erase(id); }
 
     void setWireframe(const std::string& id, bool status){ _renderers[id]->set_wireframe(status); }
@@ -39,6 +49,7 @@ public:
     }
 
     GLFWwindow* getWindowPointer() { return _win; }
+    
 
 private:
     virtual void controls();
@@ -86,16 +97,22 @@ private:
             default: throw std::logic_error("[moveView] unhandled direction");
         }
     }
+    
 
 private:
     GLFWwindow* _win;
-    std::unordered_map<std::string, std::shared_ptr<Renderer>> _renderers;
-
-    const float dmove = 0.01f;
+    RendererMap _renderers;
 
     Camera _cam;
 
+
     bool _wireframe = false;
+    const float dmove = 0.01f;
+
+public: 
+
+    TextureBank _tbank;
+    ProgramBank _pbank;
 };
 
 

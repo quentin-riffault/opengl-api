@@ -6,7 +6,7 @@ class CompanionCubeRenderer : public Renderer{
 	public: 
 		CompanionCubeRenderer();
 		virtual ~CompanionCubeRenderer();
-
+		virtual void setup_after_registration() override;
 		virtual void render() override;
 
 	private:
@@ -31,7 +31,7 @@ class CompanionCubeRenderer : public Renderer{
 			2,1,5,	2,5,6  // -z
 		};
 		
-		Texture _tex; 
-    	Program _prog;
+		std::shared_ptr<Texture> _tex;  
+    	std::shared_ptr<Program> _prog;
     	VAO _vao;
 };

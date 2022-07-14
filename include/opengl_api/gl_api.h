@@ -6,5 +6,5 @@
 #include "buffers/vao.h"
 #include "buffers/ebo.h"
 #include "programs/shader.h"
-#include "programs/program.h"
-#include "textures/texture.h"
+#include "programs/program_bank.h"
+#include "textures/texture_bank.h"

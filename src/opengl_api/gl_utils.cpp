@@ -20,7 +20,6 @@ std::string gl_utils::readfile(const std::string& file_path) {
 
     while(std::getline(file, line)){
         contents += line + "\n";
-        std::cout << line << std::endl;
     }
 
     file.close();
